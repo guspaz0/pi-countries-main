@@ -1,9 +1,19 @@
-const { allCountries, findPkCountry } = require('../services')
+const { allCountries, findPkCountry, findCountriesByName } = require('../services')
 
 async function getAllCountries(req,res) {
     try{
-        const Countries = await allCountries()
-        res.status(200).json(Countries)
+        const {name} = req.query
+        if (name) {
+            const results = await findCountriesByName(name)
+            if (results.length === 0) {
+                throw new Error('Not Found')
+            } else {
+                res.status(200).json(results)
+            }
+        } else {
+            const Countries = await allCountries()
+            res.status(200).json(Countries)
+        }
     } catch (error) {
         res.status(500).json({message: error.message})
     }

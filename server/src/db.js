@@ -33,8 +33,8 @@ const { Country, Activity } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Country.belongsToMany(Activity, {through: 'Country_Activity'})
-Activity.belongsToMany(Country, {through: 'Country_Activity'})
+Country.belongsToMany(Activity, {through: 'Country_Activity', timestamps: false})
+Activity.belongsToMany(Country, {through: 'Country_Activity', timestamps: false})
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
