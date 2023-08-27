@@ -1,17 +1,13 @@
-import React from 'react';
-import {useNavigate} from 'react-router-dom';
 import {NavbarStyle} from '../CSS';
-import { searchCountry } from '../redux/actions';
 
-export default function Navbar() {
+export default function Navbar({navigate, dispatch, searchCountry}) {
 
-    const navigate = useNavigate()
     function handleClick() {
         navigate('/form')
     }
     function handleSearch() {
         const name = document.querySelector('input[name="searchCountry"]').value
-        console.log(name)
+        dispatch(searchCountry(name))
     }
     return (
         <NavbarStyle>

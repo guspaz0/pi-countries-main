@@ -13,6 +13,8 @@ export const PaginationStyle = styled.div`
         width: 20px;
     }
     .activePage {
-        background-color: gray;
+        color: white;
+        font-weight: bold;
+        background-color: black;
     }
 `

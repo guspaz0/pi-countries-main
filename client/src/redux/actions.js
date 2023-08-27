@@ -23,6 +23,7 @@ export function searchCountry(name) {
     return async function(dispatch){
         try {
             const {data} = await axios.get(`${URL}/countries?name=${name}`)
+            console.log(data)
             if (data) {
                 dispatch({
                     type: actions.SEARCH_COUNTRY,

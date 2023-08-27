@@ -1,11 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-export default function Card(props) {
-    const {name, flags, region} = props.country
+export default function Card({country, navigate}) {
+    const {id, name, flags, region} = country
 
     function handleClick() {
-
+        navigate(`/detail/${id}`)
     }
     return (
         <div className='country'onClick={handleClick}>

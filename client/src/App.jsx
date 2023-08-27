@@ -2,11 +2,12 @@ import React from "react";
 import {useNavigate, useLocation, Route, Routes} from 'react-router-dom';
 import {LandingPage, Home, Form, Detail, Navbar} from './components/index.jsx';
 import {useDispatch, useSelector} from 'react-redux';
-import { getAllCountries } from "./redux/actions.js";
+import { getAllCountries, searchCountry } from "./redux/actions.js";
 import { AppStyle } from "./CSS/app.js";
 
 export default function App() {
 
+  const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const Countries = useSelector(state => state.allCountries)
@@ -15,16 +16,23 @@ export default function App() {
     if (Countries.length === 0) {
       dispatch(getAllCountries())
     }
-  },[dispatch])
+  },[dispatch, Countries])
 
   return (
   <AppStyle>
-    {location.pathname !== '/' && <Navbar/>}
+    {location.pathname !== '/' && <Navbar 
+      navigate={navigate}
+      dispatch={dispatch}
+      searchCountry={searchCountry}
+    />}
     <Routes>
-      <Route path='/home' element={<Home countries={Countries}/>}/>
+      <Route path='/home' element={<Home
+        Countries={Countries}
+        navigate={navigate}/>}
+      />
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/form' element={<Form/>}/>
-      <Route path='/detail' elemen={<Detail/>}/>  
+      <Route path='/detail' element={<Detail/>}/>  
     </Routes>
   </AppStyle>
   )
