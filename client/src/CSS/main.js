@@ -1,4 +1,11 @@
+import styled from 'styled-components';
+
+export const MainStyle = styled.div`
+  background-image: url('https://www.pinclipart.com/picdir/middle/131-1319815_medium-image-transparent-world-map-png-clipart.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 :root {
+  
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -67,3 +74,5 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+`

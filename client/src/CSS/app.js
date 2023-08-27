@@ -1,3 +1,6 @@
+import styled from 'styled-components';
+
+export const AppStyle = styled.div`
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +43,4 @@
 .read-the-docs {
   color: #888;
 }
+`
