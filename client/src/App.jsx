@@ -10,12 +10,13 @@ export default function App() {
   const location = useLocation();
   const dispatch = useDispatch();
   const Countries = useSelector(state => state.allCountries)
-  const [page, setPage] = React.useState(0)
-  const [maxPage, setMaxPage] = React.useState(Math.ceil(Countries/10))
-  
+
   React.useEffect(() => {
-    dispatch(getAllCountries())
-},[dispatch])
+    if (Countries.length === 0) {
+      dispatch(getAllCountries())
+    }
+  },[dispatch])
+
   return (
   <AppStyle>
     {location.pathname !== '/' && <Navbar/>}

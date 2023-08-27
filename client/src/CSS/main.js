@@ -1,7 +1,11 @@
 import styled from 'styled-components';
+import worldmap from '../assets/worldmap.png'
+
+
 
 export const MainStyle = styled.div`
-  background-image: url('https://www.pinclipart.com/picdir/middle/131-1319815_medium-image-transparent-world-map-png-clipart.png');
+  //background-image: url('https://e7.pngegg.com/pngimages/80/607/png-clipart-world-map-cartography-world-map-miscellaneous-world.png');
+  background-color: rgba(150, 200, 255, 0.87);
   background-size: cover;
   background-repeat: no-repeat;
 :root {

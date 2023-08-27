@@ -18,3 +18,19 @@ export function getAllCountries() {
         return error
     }
 }}
+
+export function searchCountry(name) {
+    return async function(dispatch){
+        try {
+            const {data} = await axios.get(`${URL}/countries?name=${name}`)
+            if (data) {
+                dispatch({
+                    type: actions.SEARCH_COUNTRY,
+                    payload: data
+                })
+            }
+        }catch (error) {
+            return error
+        }
+    }
+}

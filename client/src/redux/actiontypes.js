@@ -1,1 +1,2 @@
 export const ALL_COUNTRIES = "ALL_COUNTRIES"
+export const SEARCH_COUNTRY = 'SEARCH_COUNTRY'
