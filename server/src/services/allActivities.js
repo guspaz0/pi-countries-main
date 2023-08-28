@@ -7,7 +7,8 @@ async function allActivities() {
                 model: Country,
                 attributes: ['id'],
                 through: { attributes: []}
-            }
+            },
+            order: [['name', 'ASC']]
         }
         )
         return allActivities

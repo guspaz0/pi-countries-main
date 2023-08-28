@@ -35,3 +35,35 @@ export function searchCountry(name) {
         }
     }
 }
+
+export function getCountryID(id) {
+    return async function(dispatch){
+        try {
+            const {data} = await axios.get(`${URL}/countries/${id}`)
+            if (data) {
+                dispatch({
+                    type: actions.GET_ID_COUNTRY,
+                    payload: data
+                })
+            }
+        }catch (error) {
+            return error
+        }
+    }
+}
+
+export function allActivities() {
+    return async function(dispatch){
+        try {
+            const {data} = await axios.get(`${URL}/activities`)
+            if (data) {
+                dispatch({
+                    type: actions.ALL_ACTIVITIES,
+                    payload: data
+                })
+            }
+        }catch (error) {
+            return error
+        }
+    }
+}

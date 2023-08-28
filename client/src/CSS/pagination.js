@@ -4,8 +4,9 @@ export const PaginationStyle = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 3px;
     button {
         border-radius: 5px;
         padding: 0px;

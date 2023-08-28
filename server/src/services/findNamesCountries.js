@@ -8,6 +8,7 @@ async function findCountriesByName(name) {
                 name:
                     {[Op.iLike]: `%${name}%`}
                 },
+            order: [['name', 'ASC']],
             raw: true
         })
         return results

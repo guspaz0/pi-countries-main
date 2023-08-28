@@ -1,8 +1,8 @@
 import React from "react";
-import {useNavigate, useLocation, Route, Routes} from 'react-router-dom';
+import {useNavigate, useLocation, Route, Routes, useParams} from 'react-router-dom';
 import {LandingPage, Home, Form, Detail, Navbar} from './components/index.jsx';
-import {useDispatch, useSelector} from 'react-redux';
-import { getAllCountries, searchCountry } from "./redux/actions.js";
+import {useDispatch, useSelector, } from 'react-redux';
+import { getAllCountries, searchCountry, getCountryID, allActivities } from "./redux/actions.js";
 import { AppStyle } from "./CSS/app.js";
 
 export default function App() {
@@ -11,10 +11,15 @@ export default function App() {
   const location = useLocation();
   const dispatch = useDispatch();
   const Countries = useSelector(state => state.allCountries)
+  const idDetail = useSelector(state => state.idDetail)
+  const Activities = useSelector(state => state.Activities)
 
   React.useEffect(() => {
     if (Countries.length === 0) {
       dispatch(getAllCountries())
+    }
+    if (Activities.length === 0) {
+      dispatch(allActivities())
     }
   },[dispatch, Countries])
 
@@ -28,11 +33,18 @@ export default function App() {
     <Routes>
       <Route path='/home' element={<Home
         Countries={Countries}
-        navigate={navigate}/>}
+        navigate={navigate}
+        Activities={Activities}
+        />}
       />
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/form' element={<Form/>}/>
-      <Route path='/detail' element={<Detail/>}/>  
+      <Route path='/detail/:id' element={<Detail 
+        useParams={useParams}
+        dispatch={dispatch}
+        getCountryID={getCountryID}
+        idDetail={idDetail}
+        />}/>  
     </Routes>
   </AppStyle>
   )
