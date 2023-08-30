@@ -67,3 +67,19 @@ export function allActivities() {
         }
     }
 }
+
+export function orderCountries({order, region, activities}) {
+    return async function (dispatch) {
+        try {
+            const {data} = await axios.get(`${URL}/countries?order=${order}&region=${region}&activities=${activities}`)
+            if (data) {
+                dispatch({
+                    type: actions.ORDER_AND_FILTER,
+                    payload: data
+                })
+            }
+        } catch (error) {
+            return error
+        }
+    }
+}
