@@ -16,7 +16,6 @@ async function orderAndFilter({order, region, activities}) {
                 },
                 through: { attributes: []}
             },
-
         })
         return results
         // } 
@@ -27,9 +26,6 @@ async function orderAndFilter({order, region, activities}) {
         //     })
         //     return results
         // }
-
-        // }
-
     } catch (error) {
         return error
     } 

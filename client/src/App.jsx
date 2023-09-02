@@ -13,6 +13,7 @@ export default function App() {
   const Countries = useSelector(state => state.allCountries)
   const idDetail = useSelector(state => state.idDetail)
   const Activities = useSelector(state => state.Activities)
+  const CpCountries = useSelector(state => state.copyAllCountries)
 
   React.useEffect(() => {
     if (Countries.length === 0) {
@@ -38,7 +39,9 @@ export default function App() {
         />}
       />
       <Route path='/' element={<LandingPage/>}/>
-      <Route path='/form' element={<Form/>}/>
+      <Route path='/form' element={<Form 
+        copyAllCountries={CpCountries}
+      />}/>
       <Route path='/detail/:id' element={<Detail 
         useParams={useParams}
         dispatch={dispatch}

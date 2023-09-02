@@ -13,11 +13,11 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 allCountries: action.payload,
+                copyAllCountries: state.allCountries,
             }
         case actions.SEARCH_COUNTRY:
             return {
                 ...state,
-                copyAllCountries: state.allCountries,
                 allCountries: action.payload,
             }
         case actions.GET_ID_COUNTRY:
