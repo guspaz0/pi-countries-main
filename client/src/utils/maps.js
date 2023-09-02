@@ -1,25 +1,18 @@
-// Initialize and add the map
-let map;
+export function Validate(obj) {
+ const { name, difficult, duration, season, country } = obj;
+let errors = {}
+if (!name) errors = {...errors, name: 'name cannot be null'}
+if (name.lenght < 10 || name.length > 30) errors = {...errors, name: 'name must have at least 10 characters and 30 maximum'}
+if (name)
 
-async function initMap() {
-  // The location of Uluru
-  const position = { lat: -25.344, lng: 131.031 };
-  // Request needed libraries.
-  //@ts-ignore
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+if (difficult.isNaN() || difficult < 0 || difficult > 5) errors = {...errors, difficult: 'difficult must be a number between 0 and 5'}
 
-  // The map, centered at Uluru
-  map = new Map(document.getElementById("map"), {
-    zoom: 4,
-    center: position,
-    mapId: "DEMO_MAP_ID",
-  });
+if (!duration || duration === '00:00:00') errors = {...errors, duration: 'duration must be time in hh:mm format and in a range between 00:15 and 10:00'}
 
-  // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerView({
-    map: map,
-    position: position,
-    title: "Uluru",
-  });
+if (!season) error = {...errors, season: 'season cannot be null'}
+
+if (!country) errors = {...errors, country: 'select at least one country'}
+if (country.length > 20) errors = {...errors, country: '20 countries max' }
+
+return errors
 }
