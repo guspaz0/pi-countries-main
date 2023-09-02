@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormStyle } from '../CSS';
-import { searchCountry } from '../redux/actions';
 
 export default function Form({copyAllCountries}) {
 
@@ -23,10 +22,22 @@ export default function Form({copyAllCountries}) {
             const filterName = copyAllCountries.filter((e) => e.name.toLowerCase().includes(value.toLowerCase())).map((e) => {return {name: e.name, id: e.id}})
             setCountry(filterName)
         }
-        if (name === 'selectCountry') {
+        else if (name === 'selectCountry') {
+            if (form.countries.some((x) => x === value)) {
+                setForm({
+                    ...form,
+                    countries: form.countries.filter((x) => x !== value)
+                })
+            } else {
+                setForm({
+                    ...form,
+                    countries: [...form.countries, value]
+                })
+            }
+        } else {
             setForm({
                 ...form,
-                countries: [...form.countries, value]
+                [name]: value
             })
         }
     }
@@ -43,13 +54,13 @@ export default function Form({copyAllCountries}) {
         <h1>Add Activities</h1>
         <form>
             <label htmlFor="name">Name</label>
-            <input id='name' name='name' type='text'/>
+            <input id='name' name='name' type='text' onChange={handleChange}/>
             <label htmlFor="difficult">Difficult</label>
-            <input id='difficult' name='difficult' type='range' min={0} max={5}/>
+            <input id='difficult' name='difficult' type='range' min={0} max={5} onChange={handleChange}/>
             <label htmlFor="duration">Duration</label>
-            <input id='duration' name='duration' type='time'/>
+            <input id='duration' name='duration' type='time' onChange={handleChange}/>
             <label htmlFor="season">Season</label>
-            <select id='season' name='season'>
+            <select id='season' name='season' onChange={handleChange}>
                 <option value='summer'>Summer</option>
                 <option value='winter'>Winter</option>
                 <option value='autumn'>Autumn</option>
@@ -59,11 +70,13 @@ export default function Form({copyAllCountries}) {
                 <input type='search' placeholder='search Country' name='search' onChange={handleChange}/>
                 <label htmlFor='countries'>Search results</label>
                 <select style={{height: '150px', minWidth: '100px'}} id='selectCountry' name='selectCountry' multiple onChange={handleChange}>
-                    {Country && Country.map((e) => {return <option key={e.id} value={e.id}>{e.name}</option>})}
+                    {Country && Country.map((e) => {
+                        return <option key={e.id} value={e.id}>{e.name}</option>})}
                 </select>
                 <label htmlFor='country'>Selected Countries</label>
-                <select style={{height: '150px', width: '100px'}} id='country' multiple onChange={handleChange}>
-                    {form.countries && form.countries.map((e) => {return <option key={e} value={e}>{e}</option>})}
+                <select style={{minHeight: '150px', minwidth: '100px'}} id='country' name='selectCountry' multiple onChange={handleChange}>
+                    {form.countries && form.countries.map((e) => {
+                        return <option key={e} value={e}>{copyAllCountries.filter((x) => x.id === e)[0].name}</option>})}
                 </select>
             
             <input type='submit' onClick={handleSubmit}/>

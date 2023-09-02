@@ -83,3 +83,19 @@ export function orderCountries({order, region, activities}) {
         }
     }
 }
+
+export function postActivity(form) {
+    return async function (dispatch) {
+        try {
+            const {data} = await axios.post(`${URL}/activities`, form)
+            if (data) {
+                dispatch({
+                    type: actions.POST_ACTIVITY,
+                    payload: data
+                })
+            }
+        } catch (error) {
+            return error
+        }
+    }
+}
