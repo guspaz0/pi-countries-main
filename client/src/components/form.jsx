@@ -1,7 +1,11 @@
 import React from 'react';
 import { FormStyle } from '../CSS';
+import { postActivities } from '../redux/actions';
+import Validate from '../utils/validate'
 
 export default function Form({copyAllCountries}) {
+
+    const [erros, setErrors] = React.useState(null)
 
     const [Country, setCountry] = React.useState([{
         name: null,
@@ -15,6 +19,11 @@ export default function Form({copyAllCountries}) {
         season: null,
         countries: []
     })
+
+    React.useEffect(() => {
+        setErrors(Validate(form))
+},[form])
+
     function handleChange(e) {
         e.preventDefault()
         const {name, value} = e.target
@@ -48,6 +57,7 @@ export default function Form({copyAllCountries}) {
     function handleSubmit(e){
         e.preventDefault()
         console.log(form)
+        postActivities(form)
     }
     return (
         <FormStyle>
@@ -55,10 +65,13 @@ export default function Form({copyAllCountries}) {
         <form>
             <label htmlFor="name">Name</label>
             <input id='name' name='name' type='text' onChange={handleChange}/>
+{errors.name && <p className='error'>{errors.name}</p>}
             <label htmlFor="difficult">Difficult</label>
             <input id='difficult' name='difficult' type='range' min={0} max={5} onChange={handleChange}/>
+{errors.difficult && <p className='error'>{errors.difficult}</p>}
             <label htmlFor="duration">Duration</label>
             <input id='duration' name='duration' type='time' onChange={handleChange}/>
+{errors.duration && <p className='error'>{errors.duration}</p>}
             <label htmlFor="season">Season</label>
             <select id='season' name='season' onChange={handleChange}>
                 <option value='summer'>Summer</option>
@@ -66,6 +79,7 @@ export default function Form({copyAllCountries}) {
                 <option value='autumn'>Autumn</option>
                 <option value='spring'>Spring</option>
             </select>
+{errors.season && <p className='error'>{errors.season}</p>}
             <label htmlFor='select'>Select Countries</label>
                 <input type='search' placeholder='search Country' name='search' onChange={handleChange}/>
                 <label htmlFor='countries'>Search results</label>
@@ -78,6 +92,7 @@ export default function Form({copyAllCountries}) {
                     {form.countries && form.countries.map((e) => {
                         return <option key={e} value={e}>{copyAllCountries.filter((x) => x.id === e)[0].name}</option>})}
                 </select>
+{errors.country && <p className='error'>{errors.country}</p>}
             
             <input type='submit' onClick={handleSubmit}/>
         </form>
