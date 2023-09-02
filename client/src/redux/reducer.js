@@ -30,6 +30,11 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 Activities: action.payload
             }
+       case actions.POST_ACTIVITIES:
+            return {
+                ...state,
+                Activities: [...state.Activities, action.payload]
+            }
         default:
             return { ...state };
     }
