@@ -1,11 +1,20 @@
 import React from 'react';
 import { FormStyle } from '../CSS';
-import { postActivities } from '../redux/actions';
+import { postActivity } from '../redux/actions';
+import { useDispatch } from 'react-redux';
 import Validate from '../utils/validate'
 
 export default function Form({copyAllCountries}) {
 
-    const [erros, setErrors] = React.useState(null)
+    const dispatch = useDispatch()
+
+    const [errors, setErrors] = React.useState({
+        name: '',
+        difficult: 0,
+        duration: '',
+        season: '',
+        countries: [],
+    })
 
     const [Country, setCountry] = React.useState([{
         name: null,
@@ -14,15 +23,15 @@ export default function Form({copyAllCountries}) {
 
     const [form, setForm] = React.useState({
         name: null,
-        difficult: 0,
-        duration: null,
-        season: null,
-        countries: []
+        difficult: 1,
+        duration: '00:15',
+        season: 'summer',
+        country: []
     })
 
     React.useEffect(() => {
         setErrors(Validate(form))
-},[form])
+    },[form])
 
     function handleChange(e) {
         e.preventDefault()
@@ -32,17 +41,23 @@ export default function Form({copyAllCountries}) {
             setCountry(filterName)
         }
         else if (name === 'selectCountry') {
-            if (form.countries.some((x) => x === value)) {
+            if (form.country.some((x) => x === value)) {
                 setForm({
                     ...form,
-                    countries: form.countries.filter((x) => x !== value)
+                    country: form.country.filter((x) => x !== value)
                 })
             } else {
                 setForm({
                     ...form,
-                    countries: [...form.countries, value]
+                    country: [...form.country, value]
                 })
             }
+        }
+        else if (name === 'difficult') {
+            setForm({
+                ...form,
+                difficult: parseInt(value)
+            })
         } else {
             setForm({
                 ...form,
@@ -50,50 +65,77 @@ export default function Form({copyAllCountries}) {
             })
         }
     }
-    function handleSelect(e) {
-        e.preventDefault()
-        const { name } = e.target.name
-    }
+
     function handleSubmit(e){
         e.preventDefault()
-        console.log(form)
-        postActivities(form)
+        if (Object.keys(errors).length === 0) {
+            const post = dispatch(postActivity({...form, duration: `${form.duration}:00`}))
+            if (post === 201) {
+                alert(`Activity created succesfull ion Database. status code: ${post}`)
+                setForm({
+                    name: null,
+                    difficult: 1,
+                    duration: '00:15',
+                    season: 'summer',
+                    country: []
+                })
+            } else {
+                alert(`Something went wrong status code: ${post}`)
+            }
+        } else {
+            alert(`Check errors in the form`)
+        }
     }
     return (
         <FormStyle>
         <h1>Add Activities</h1>
-        <form>
-            <label htmlFor="name">Name</label>
-            <input id='name' name='name' type='text' onChange={handleChange}/>
-{errors.name && <p className='error'>{errors.name}</p>}
-            <label htmlFor="difficult">Difficult</label>
-            <input id='difficult' name='difficult' type='range' min={0} max={5} onChange={handleChange}/>
-{errors.difficult && <p className='error'>{errors.difficult}</p>}
-            <label htmlFor="duration">Duration</label>
-            <input id='duration' name='duration' type='time' onChange={handleChange}/>
-{errors.duration && <p className='error'>{errors.duration}</p>}
-            <label htmlFor="season">Season</label>
-            <select id='season' name='season' onChange={handleChange}>
-                <option value='summer'>Summer</option>
-                <option value='winter'>Winter</option>
-                <option value='autumn'>Autumn</option>
-                <option value='spring'>Spring</option>
-            </select>
-{errors.season && <p className='error'>{errors.season}</p>}
-            <label htmlFor='select'>Select Countries</label>
-                <input type='search' placeholder='search Country' name='search' onChange={handleChange}/>
-                <label htmlFor='countries'>Search results</label>
-                <select style={{height: '150px', minWidth: '100px'}} id='selectCountry' name='selectCountry' multiple onChange={handleChange}>
-                    {Country && Country.map((e) => {
-                        return <option key={e.id} value={e.id}>{e.name}</option>})}
+        <form className='form'>
+            <span>
+                <label htmlFor="name">Name</label>
+                <input id='name' name='name' type='text' onChange={handleChange}/>
+                    {errors.name && <p className='error'>{errors.name}</p>}
+            </span>
+            <span>
+                <label htmlFor="difficult">Difficult</label>
+                <input type='number' name='difficult' min='1' max='5' value={form.difficult} onChange={handleChange}/>
+            </span>
+            {errors.difficult && <p className='error'>{errors.difficult}</p>}
+            <span>
+                <label htmlFor="duration">Duration</label>
+                <input id='duration' name='duration' type='time' value={form.duration} onChange={handleChange}/>
+            </span>
+            {errors.duration && <p className='error'>{errors.duration}</p>}
+            <span>
+                <label htmlFor="season">Season</label>
+                <select id='season' name='season' defaultValue={form.season} onChange={handleChange}>
+                    <option value='summer'>Summer</option>
+                    <option value='winter'>Winter</option>
+                    <option value='autumn'>Autumn</option>
+                    <option value='spring'>Spring</option>
                 </select>
-                <label htmlFor='country'>Selected Countries</label>
-                <select style={{minHeight: '150px', minwidth: '100px'}} id='country' name='selectCountry' multiple onChange={handleChange}>
-                    {form.countries && form.countries.map((e) => {
-                        return <option key={e} value={e}>{copyAllCountries.filter((x) => x.id === e)[0].name}</option>})}
-                </select>
-{errors.country && <p className='error'>{errors.country}</p>}
-            
+                {errors.season && <p className='error'>{errors.season}</p>}
+            </span>
+            <span className='searchCountry'>
+                    <label htmlFor='select'>Select Countries</label>
+                    <input type='search' placeholder='search Country' name='search' onChange={handleChange}/>
+            </span>
+            <span className='selectCountry'>
+                <span className='countryChild'>
+                    <label htmlFor='countries'>Search results</label>
+                    <select style={{height: '150px', minWidth: '100px'}} id='selectCountry' name='selectCountry' multiple onChange={handleChange}>
+                        {Country && Country.map((e) => {
+                            return <option key={e.id} value={e.id}>{e.name}</option>})}
+                    </select>
+                </span>
+                <span className='countryChild'>
+                    <label htmlFor='country'>Selected Countries</label>
+                    <select style={{minHeight: '150px', minWidth: '100px'}} id='country' name='selectCountry' multiple onChange={handleChange}>
+                        {form.country && form.country.map((e) => {
+                            return <option key={e} value={e}>{copyAllCountries.filter((x) => x.id === e)[0].name}</option>})}
+                    </select>
+                    {errors.country && <p className='error'>{errors.country}</p>}
+                </span>
+            </span>
             <input type='submit' onClick={handleSubmit}/>
         </form>
         </FormStyle>

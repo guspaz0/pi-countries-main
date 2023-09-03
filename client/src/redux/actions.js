@@ -68,16 +68,25 @@ export function allActivities() {
     }
 }
 
-export function orderCountries({order, region, activities}) {
+export function orderCountries(order) {
     return async function (dispatch) {
         try {
-            const {data} = await axios.get(`${URL}/countries?order=${order}&region=${region}&activities=${activities}`)
-            if (data) {
-                dispatch({
-                    type: actions.ORDER_AND_FILTER,
-                    payload: data
-                })
-            }
+            dispatch({
+                type: actions.ORDER,
+                payload: order
+            })
+        } catch (error) {
+            return error
+        }
+    }
+}
+export function filterCountries(filter) {
+    return async function (dispatch) {
+        try {
+            dispatch({
+                type: actions.FILTER,
+                payload: filter
+            })
         } catch (error) {
             return error
         }
@@ -85,17 +94,36 @@ export function orderCountries({order, region, activities}) {
 }
 
 export function postActivity(form) {
-    return async function (dispatch) {
-        try {
-            const {data} = await axios.post(`${URL}/activities`, form)
-            if (data) {
-                dispatch({
-                    type: actions.POST_ACTIVITY,
-                    payload: data
-                })
+    axios.post(`${URL}/activities`, form).then((response) => {
+        const {data , status} = response
+        if (data) {
+            return async function (dispatch) {
+                try {
+                    dispatch({
+                        type: actions.POST_ACTIVITY,
+                        payload: data
+                    })
+                } catch (error) {
+                    console.log(error)
+                }
             }
-        } catch (error) {
-            return error
+        } else if (status !== Number(201)) {
+            
         }
-    }
+    })
+    // return async function (dispatch) {
+    //     try {
+    //         const {data, status} = await axios.post(`${URL}/activities`, form)
+    //         if (data) {
+    //             dispatch({
+    //                 type: actions.POST_ACTIVITY,
+    //                 payload: data
+    //             })
+    //         }
+    //         console.log(status, typeof(status))
+    //         if (status === Number(201)).then()
+    //     } catch (error) {
+    //         return error
+    //     }
+    //}
 }

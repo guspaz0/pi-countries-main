@@ -2,7 +2,7 @@ import React from "react";
 import {useNavigate, useLocation, Route, Routes, useParams} from 'react-router-dom';
 import {LandingPage, Home, Form, Detail, Navbar} from './components/index.jsx';
 import {useDispatch, useSelector, } from 'react-redux';
-import { getAllCountries, searchCountry, getCountryID, allActivities } from "./redux/actions.js";
+import { getAllCountries, searchCountry, getCountryID, allActivities, orderCountries } from "./redux/actions.js";
 import { AppStyle } from "./CSS/app.js";
 
 export default function App() {
@@ -36,11 +36,14 @@ export default function App() {
         Countries={Countries}
         navigate={navigate}
         Activities={Activities}
+        orderCountries={orderCountries}
+        dispatch={dispatch}
         />}
       />
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/form' element={<Form 
         copyAllCountries={CpCountries}
+        //dispatch={dispatch}
       />}/>
       <Route path='/detail/:id' element={<Detail 
         useParams={useParams}

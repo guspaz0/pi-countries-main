@@ -3,3 +3,5 @@ export const SEARCH_COUNTRY = 'SEARCH_COUNTRY'
 export const GET_ID_COUNTRY = "GET_ID_COUNTRY"
 export const ALL_ACTIVITIES = 'ALL_ACTIVITIES'
 export const POST_ACTIVITY = 'POST_ACTIVITY'
+export const ORDER = 'ORDER'
+export const FILTER = 'FILTER'
