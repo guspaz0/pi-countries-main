@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useNavigate, useLocation, Route, Routes, useParams} from 'react-router-dom';
 import {LandingPage, Home, Form, Detail, Navbar} from './components/index.jsx';
 import {useDispatch, useSelector, } from 'react-redux';
@@ -15,7 +15,7 @@ export default function App() {
   const Activities = useSelector(state => state.Activities)
   const CpCountries = useSelector(state => state.copyAllCountries)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (Countries.length === 0) {
       dispatch(getAllCountries())
     }
@@ -23,6 +23,10 @@ export default function App() {
       dispatch(allActivities())
     }
   },[dispatch, Countries])
+
+  useEffect(()=>{
+
+  },[Activities])
 
   return (
   <AppStyle>
@@ -33,8 +37,7 @@ export default function App() {
     />}
     <Routes>
       <Route path='/home' element={<Home
-        Countries={Countries}
-        navigate={navigate}
+        //Countries={Countries}
         Activities={Activities}
         orderCountries={orderCountries}
         dispatch={dispatch}
@@ -43,6 +46,7 @@ export default function App() {
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/form' element={<Form 
         copyAllCountries={CpCountries}
+        //Activities={Activities}
         //dispatch={dispatch}
       />}/>
       <Route path='/detail/:id' element={<Detail 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { PaginationStyle } from '../CSS/pagination';
 
 export default function Pagination({page, setPage, maxPage}) {
@@ -10,6 +10,15 @@ export default function Pagination({page, setPage, maxPage}) {
         }
         return pages
     })
+    useEffect(() => {
+        setEnumPages(() => {
+            let pages = []
+            for (var i = 0; i < maxPage; i++) {
+                pages = [...pages, i]
+            }
+            return pages
+        })
+    },[maxPage])
     function handlePrevious(){
         setPage(page-1)
     }

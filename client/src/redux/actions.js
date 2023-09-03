@@ -7,8 +7,8 @@ const URL = `http://${VITE_DB_HOST}:${VITE_DB_PORT}`
 export function getAllCountries() {
     return async function (dispatch) {
     try {
-        const {data} = await axios.get(`${URL}/countries`)
-        if (data) {
+        const {data, status} = await axios.get(`${URL}/countries`)
+        if (status) {
             dispatch({
                 type: actions.ALL_COUNTRIES,
                 payload: data
@@ -80,12 +80,12 @@ export function orderCountries(order) {
         }
     }
 }
-export function filterCountries(filter) {
+export function filterCountries({name, value}) {
     return async function (dispatch) {
         try {
             dispatch({
                 type: actions.FILTER,
-                payload: filter
+                payload: {name, value}
             })
         } catch (error) {
             return error
@@ -94,36 +94,17 @@ export function filterCountries(filter) {
 }
 
 export function postActivity(form) {
-    axios.post(`${URL}/activities`, form).then((response) => {
-        const {data , status} = response
-        if (data) {
-            return async function (dispatch) {
-                try {
-                    dispatch({
-                        type: actions.POST_ACTIVITY,
-                        payload: data
-                    })
-                } catch (error) {
-                    console.log(error)
-                }
+    return async function (dispatch) {
+        try {
+            const {data} = await axios.post(`${URL}/activities`, form)
+            if (data) {
+                dispatch({
+                    type: actions.POST_ACTIVITY,
+                    payload: data
+                })
             }
-        } else if (status !== Number(201)) {
-            
+        } catch (error) {
+            return error
         }
-    })
-    // return async function (dispatch) {
-    //     try {
-    //         const {data, status} = await axios.post(`${URL}/activities`, form)
-    //         if (data) {
-    //             dispatch({
-    //                 type: actions.POST_ACTIVITY,
-    //                 payload: data
-    //             })
-    //         }
-    //         console.log(status, typeof(status))
-    //         if (status === Number(201)).then()
-    //     } catch (error) {
-    //         return error
-    //     }
-    //}
+    }
 }

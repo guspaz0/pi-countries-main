@@ -4,9 +4,9 @@ const { conn } = require('./src/db.js');
 const PORT = 3001;
 const {initializeDB} = require('./src/services/bulkcreate')
 
-conn.sync({ force: true }).then(() => {
+conn.sync({ alter: true }).then(() => {
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
-  initializeDB()
+  //initializeDB()
 })
 }).catch(error => console.error(error))

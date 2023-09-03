@@ -1,4 +1,9 @@
-export default function Card({country, navigate}) {
+import {useNavigate} from 'react-router-dom';
+
+export default function Card({country}) {
+
+    const navigate = useNavigate()
+
     const {id, name, flags, region} = country
 
     function handleClick() {

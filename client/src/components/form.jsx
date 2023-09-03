@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { FormStyle } from '../CSS';
 import { postActivity } from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Validate from '../utils/validate'
 
 export default function Form({copyAllCountries}) {
 
     const dispatch = useDispatch()
+    const Activities = useSelector(state => state.Activities)
 
-    const [errors, setErrors] = React.useState({
+    const [errors, setErrors] = useState({
         name: '',
         difficult: 0,
         duration: '',
@@ -16,12 +17,12 @@ export default function Form({copyAllCountries}) {
         countries: [],
     })
 
-    const [Country, setCountry] = React.useState([{
+    const [Country, setCountry] = useState([{
         name: null,
         id: null,
-    } ])
+    }])
 
-    const [form, setForm] = React.useState({
+    const [form, setForm] = useState({
         name: null,
         difficult: 1,
         duration: '00:15',
@@ -29,9 +30,22 @@ export default function Form({copyAllCountries}) {
         country: []
     })
 
-    React.useEffect(() => {
+    useEffect(() => {
         setErrors(Validate(form))
     },[form])
+
+    useEffect(() => {
+        if (Activities.some((x) => x.name === form.name)) {
+            alert('Activity created successfull')
+            setForm({
+                name: null,
+                difficult: 1,
+                duration: '00:15',
+                season: 'summer',
+                country: []
+            })
+        }
+    },[Activities, form.name])
 
     function handleChange(e) {
         e.preventDefault()
@@ -69,21 +83,9 @@ export default function Form({copyAllCountries}) {
     function handleSubmit(e){
         e.preventDefault()
         if (Object.keys(errors).length === 0) {
-            const post = dispatch(postActivity({...form, duration: `${form.duration}:00`}))
-            if (post === 201) {
-                alert(`Activity created succesfull ion Database. status code: ${post}`)
-                setForm({
-                    name: null,
-                    difficult: 1,
-                    duration: '00:15',
-                    season: 'summer',
-                    country: []
-                })
-            } else {
-                alert(`Something went wrong status code: ${post}`)
-            }
+            dispatch(postActivity({...form, duration: `${form.duration}:00`}))
         } else {
-            alert(`Check errors in the form`)
+            alert('please solve the form validations')
         }
     }
     return (
@@ -92,7 +94,7 @@ export default function Form({copyAllCountries}) {
         <form className='form'>
             <span>
                 <label htmlFor="name">Name</label>
-                <input id='name' name='name' type='text' onChange={handleChange}/>
+                <input id='name' name='name' type='text' value={form.name} onChange={handleChange}/>
                     {errors.name && <p className='error'>{errors.name}</p>}
             </span>
             <span>
@@ -136,7 +138,7 @@ export default function Form({copyAllCountries}) {
                     {errors.country && <p className='error'>{errors.country}</p>}
                 </span>
             </span>
-            <input type='submit' onClick={handleSubmit}/>
+            <input className='submit' type='submit' value='Send' onClick={handleSubmit}/>
         </form>
         </FormStyle>
     )

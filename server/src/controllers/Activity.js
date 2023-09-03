@@ -2,6 +2,7 @@ const {createActivity, allActivities} = require('../services')
 
 async function postActivity(req,res) {
     try{
+        console.log(req.body)
         const create = await createActivity(req.body)
         if(create) {
             res.status(201).json(create)
