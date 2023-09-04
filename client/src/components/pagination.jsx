@@ -18,6 +18,7 @@ export default function Pagination({page, setPage, maxPage}) {
             }
             return pages
         })
+        setPage(0)
     },[maxPage])
     function handlePrevious(){
         setPage(page-1)

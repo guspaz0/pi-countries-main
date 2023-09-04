@@ -1,4 +1,4 @@
-const { Country } = require('../db')
+const { Country, Activity } = require('../db')
 const { Op } = require('sequelize')
 
 async function findCountriesByName(name) {
@@ -9,7 +9,11 @@ async function findCountriesByName(name) {
                     {[Op.iLike]: `%${name}%`}
                 },
             order: [['name', 'ASC']],
-            raw: true
+            include: {
+                model: Activity,
+                attributes: ['name'],
+                through: {attributes: []}
+            }
         })
         return results
     } catch (error) {

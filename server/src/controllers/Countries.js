@@ -10,10 +10,11 @@ async function getAllCountries(req,res) {
             } else {
                 res.status(200).json(results)
             }
-        } else if (!name && order && region && activities) {
-            const results = await orderAndFilter({order, region, activities})
-            res.status(200).json(results)
         }
+        //else if (!name && order && region && activities) {
+        //     const results = await orderAndFilter({order, region, activities})
+        //     res.status(200).json(results)
+        // }
         else {
             const Countries = await allCountries()
             res.status(200).json(Countries)

@@ -1,20 +1,34 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import Card from './card';
 import { CardStyle, HomeStyle } from '../CSS';
 import Pagination from './pagination';
 import {useSelector, useDispatch} from 'react-redux';
 import { orderCountries, filterCountries } from '../redux/actions';
 
-export default function Home({Activities}) {
+export default function Home() {
 
     const dispatch = useDispatch()
     const AllCountries = useSelector(state => state.allCountries)
-    const [page, setPage] = React.useState(0)
+    const Activities = useSelector(state => state.Activities)
+    const Filters = useSelector(state => state.filter)
+    const [page, setPage] = useState(0)
     const perPage = 10
-    const [maxPage, setMaxPage] = React.useState(Math.ceil(AllCountries.length/perPage))
+    const [maxPage, setMaxPage] = useState(Math.ceil(AllCountries.length/perPage))
 
-    React.useEffect(()=> {
+    const [filterActivity,setFilterActivity] = useState()
+    useEffect(()=> {
         setMaxPage(Math.ceil(AllCountries.length/perPage))
+        setFilterActivity(() => {
+            let repeated = []
+            let uniques = []
+            AllCountries.filter((e) => e.Activities.length !== 0).map((x) => {
+                return repeated = [...repeated , ...x.Activities]
+            })
+            for (let i = 0; i < repeated.length; i++) {
+                if (!uniques.includes(repeated[0].name)) uniques.push(repeated[0].name)
+            }
+            return uniques
+        })
     },[AllCountries])
 
     function handleOrder(e) {
@@ -44,19 +58,20 @@ export default function Home({Activities}) {
         </span>
         <span>
             <label htmlFor='region'>Filter by Region:</label>
-            <select id='region' name='region' onChange={handleFilter}>
+            <select id='region' name='region' value={Filters.region} onChange={handleFilter}>
+                <option value='all'>All</option>
                 <option value='Americas'>Americas</option>
                 <option value='Africa'>Africa</option>
                 <option value='Asia'>Asia</option>
                 <option value='Europe'>Europe</option>
                 <option value='Oceania'>Oceania</option>
             </select>
-            <button name='reset' onClick={handleFilter}>Reset</button>
         </span>
         <span>
-            <label htmlFor='activity'>Filter by Activity:</label>
-            <select name='activity'>
-                {Activities?.map((e) => {return <option key={e.id} value={e.name}>{e.name}</option>})}
+            <label htmlFor='activity'>Filter by available Activity in current region:</label>
+            <select id='activity' name='activity' value={Filters.activity} onChange={handleFilter}>
+                <option value='all'>All</option>
+                {filterActivity?.map((e) => {return <option key={e} value={e}>{e}</option>})}
             </select>
         </span>
     </span>

@@ -7,31 +7,48 @@ const initialState = {
     Activities: [],
     order: 'A-Z',
     filter: {
-        Activity: '',
-        Region: ''
+        activity: 'all',
+        region: 'all'
     },
 }
 
 export default function reducer(state = initialState, action) {
-    function order(payload) {
-        if (payload === 'reset') return state.copyAllCountries
-        return state.allCountries.sort((a,b) => {
-        if (payload === 'Z-A') return b.name.localeCompare(a.name);
-        if (payload === 'A-Z') return a.name.localeCompare(b.name);
-        if (payload === '+population') return a.population - b.population;
-        if (payload === '-population') return b.population - a.population;
-        })}
+    function order(payload, list) {
+        if (payload === 'all') return state.copyAllCountries
+        let orderList = state.allCountries
+        if (list) orderList = list
+        return orderList.sort((a,b) => {
+            if (payload === 'Z-A') return b.name.localeCompare(a.name);
+            if (payload === 'A-Z') return a.name.localeCompare(b.name);
+            if (payload === '-population') return a.population - b.population;
+            if (payload === '+population') return b.population - a.population;
+        }
+    )}
     function filter(name, value) {
         let filteredList = []
-        if (name === 'reset') filteredList = state.copyAllCountries
         if (name === 'region') {
-            filteredList = state.allCountries.filter((e) => e.region === value)
+            if (value === 'all') {
+                filteredList = state.copyAllCountries
+            } else {
+                filteredList = state.allCountries.filter((e) => e.region.toLowerCase() === value.toLowerCase())
+            }
+            if (filteredList.length === 0) {
+                filteredList = state.copyAllCountries.filter((e) => e.region.toLowerCase() === value.toLowerCase())
+            }
         }
         if (name === 'activity') {
-            filteredList = state.allCountries.filter((e) => e.Activities.some(value))
+            if (value === 'all') {
+                if (state.filter.region === 'all') filteredList = state.copyAllCountries
+                else filteredList = state.copyAllCountries.filter((e) => e.region.toLowerCase() === state.filter.region.toLowerCase())
+            } else {
+                filteredList = state.allCountries.filter((e) => e.Activities.some((x) => x.name === value))
+            }
+            if (filteredList.length === 0) {
+                filteredList = state.copyAllCountries.filter((e) => e.Activities.some((x) => x.name === value))
+            }
         }
-        return filteredList
-        }
+        return order(state.order, filteredList)
+    }
     switch (action.type) {
         case actions.ALL_COUNTRIES:
             return {
@@ -69,7 +86,7 @@ export default function reducer(state = initialState, action) {
             let {name, value} = action.payload
             return {
                 ...state,
-                allCountries: filter(name, value),
+                allCountries: [...filter(name, value)],
                 filter: {...state.filter, [name]: value}
             }
         default:

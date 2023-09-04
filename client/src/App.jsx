@@ -22,11 +22,11 @@ export default function App() {
     if (Activities.length === 0) {
       dispatch(allActivities())
     }
-  },[dispatch, Countries])
+  },[dispatch])
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-  },[Activities])
+  // },[Activities])
 
   return (
   <AppStyle>
@@ -37,8 +37,6 @@ export default function App() {
     />}
     <Routes>
       <Route path='/home' element={<Home
-        //Countries={Countries}
-        Activities={Activities}
         orderCountries={orderCountries}
         dispatch={dispatch}
         />}
@@ -46,8 +44,6 @@ export default function App() {
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/form' element={<Form 
         copyAllCountries={CpCountries}
-        //Activities={Activities}
-        //dispatch={dispatch}
       />}/>
       <Route path='/detail/:id' element={<Detail 
         useParams={useParams}
