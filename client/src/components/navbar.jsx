@@ -1,17 +1,20 @@
 import {NavbarStyle} from '../CSS';
+import {useDispatch} from 'react-redux';
+import { searchCountry } from '../redux/actions';
+import { Link } from 'react-router-dom';
 
-export default function Navbar({navigate, dispatch, searchCountry}) {
+export default function Navbar() {
 
-    function handleClick() {
-        navigate('/form')
-    }
+    const dispatch = useDispatch()
     function handleSearch() {
         const name = document.querySelector('input[name="searchCountry"]').value
         dispatch(searchCountry(name))
     }
     return (
         <NavbarStyle>
-            <button onClick={handleClick}>Create Activity</button>
+            <Link to={'/form'}>
+                <button>Create Activity</button>
+            </Link>
             <span>
                 <input type='search' placeholder='Search country by Name' name='searchCountry'/>
                 <button onClick={handleSearch}>Search</button>

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useNavigate, useLocation, Route, Routes, useParams} from 'react-router-dom';
-import {LandingPage, Home, Form, Detail, Navbar} from './components/index.jsx';
+import {LandingPage, Home, Form, Detail, Navbar, SideBar} from './components/index.jsx';
 import {useDispatch, useSelector, } from 'react-redux';
 import { getAllCountries, searchCountry, getCountryID, allActivities, orderCountries } from "./redux/actions.js";
 import { AppStyle } from "./CSS/app.js";
@@ -36,12 +36,13 @@ export default function App() {
       searchCountry={searchCountry}
     />}
     <Routes>
-      <Route path='/home' element={<Home
-        orderCountries={orderCountries}
-        dispatch={dispatch}
-        />}
-      />
       <Route path='/' element={<LandingPage/>}/>
+      <Route path='/home' element={
+        <React.Fragment>
+          <Home/>
+          <SideBar/>
+        </React.Fragment>}
+      />
       <Route path='/form' element={<Form 
         copyAllCountries={CpCountries}
       />}/>
