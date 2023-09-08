@@ -19,7 +19,7 @@ li {
     width:320px;
     height: 100vh;
     box-sizing: border-box;
-    padding: 20px 5px 20px 30px;
+    padding: 5px 5px 5px 5px;
     transition: width 0.5s ease-in;
 }
 
@@ -52,7 +52,9 @@ li {
     max-height: 20vh;
 }
 .sideMenu.inactive .topSection .logo img{
-    margin-top: 12vh;
+    margin-top: 2vh;
+    margin-left: -3vh;
+    width: 60px;
     transition: margin-top .9s;
 }
 
@@ -95,7 +97,7 @@ li {
 
 .sideMenu.inactive .mainMenu .menuItem{
     pointer-events: none;
-    margin-top: 8vh;
+    margin-top: 3vh;
     transition: margin-top .9s;
 }
 
@@ -122,7 +124,7 @@ li {
 .sideMenu.inactive .mainMenu .menuItem span{
     opacity: 0;
     width: 0;
-    height: 0;
+    height: 0px;
     overflow: hidden;
     transition: opacity .7s ease-in;
 }
@@ -201,6 +203,7 @@ li {
 
     .sideMenu.inactive{
         width: 15vw;
+        height: 10px;
         min-width: 60px;
     }
 }
