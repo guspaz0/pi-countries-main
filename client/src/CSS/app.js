@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const AppStyle = styled.div`
+display: grid;
+grid-template-columns: auto 1fr;
+gap: 45px;
+grid-template-areas: "SideBar content";
+
 #root {
   max-width: 1280px;
   margin: 0 auto;

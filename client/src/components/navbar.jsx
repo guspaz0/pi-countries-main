@@ -1,7 +1,6 @@
 import {NavbarStyle} from '../CSS';
 import {useDispatch} from 'react-redux';
 import { searchCountry } from '../redux/actions';
-import { Link } from 'react-router-dom';
 
 export default function Navbar() {
 
@@ -12,9 +11,6 @@ export default function Navbar() {
     }
     return (
         <NavbarStyle>
-            <Link to={'/form'}>
-                <button>Create Activity</button>
-            </Link>
             <span>
                 <input type='search' placeholder='Search country by Name' name='searchCountry'/>
                 <button onClick={handleSearch}>Search</button>

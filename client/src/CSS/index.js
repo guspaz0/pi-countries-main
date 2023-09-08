@@ -6,6 +6,7 @@ import {HomeStyle} from './home';
 import {FormStyle} from './form';
 import {NavbarStyle} from './navbar';
 import {LandingStyle} from './landingPage';
+import { SideBarStyle } from './sideBar';
 
 export {
     MainStyle,
@@ -15,5 +16,6 @@ export {
     HomeStyle,
     FormStyle,
     NavbarStyle,
-    LandingStyle
+    LandingStyle,
+    SideBarStyle
 }

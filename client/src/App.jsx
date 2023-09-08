@@ -30,17 +30,17 @@ export default function App() {
 
   return (
   <AppStyle>
-    {location.pathname !== '/' && <Navbar 
+    {/* {location.pathname !== '/' && <Navbar 
       navigate={navigate}
       dispatch={dispatch}
       searchCountry={searchCountry}
-    />}
+    />} */}
     <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/home' element={
         <React.Fragment>
-          <Home/>
-          <SideBar/>
+          <SideBar className='SideBar'/>
+          <Home className='content'/>
         </React.Fragment>}
       />
       <Route path='/form' element={<Form 

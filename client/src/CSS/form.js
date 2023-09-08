@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FormStyle = styled.div`
+    grid-column: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
