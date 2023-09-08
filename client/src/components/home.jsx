@@ -3,8 +3,7 @@ import Card from './card';
 import Navbar from './navbar';
 import { CardStyle, HomeStyle } from '../CSS';
 import Pagination from './pagination';
-import {useSelector, useDispatch} from 'react-redux';
-import { orderCountries, filterCountries } from '../redux/actions';
+import {useSelector } from 'react-redux';
 
 export default function Home() {
 

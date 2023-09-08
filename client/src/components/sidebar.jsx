@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { filterCountries,orderCountries } from '../redux/actions';
 import { Link } from 'react-router-dom';
@@ -22,16 +22,10 @@ export default function SideBar() {
         //setMaxPage(Math.ceil(AllCountries.length/perPage))
         setFilterActivity(() => {
             let repeated = []
-            //let uniques = []
             AllCountries.filter((e) => e.Activities.length !== 0).map((x) => {
                 return repeated = [...repeated , ...x.Activities]
             })
-            // for (let i = 0; i < repeated.length; i++) {
-            //     if (uniques.map((e) => repeated[0].name !== e)) uniques = [...uniques, repeated[0].name]
-            // }
-            // console.log(repeated)
             return repeated
-            
         })
     },[AllCountries, Activities])
 
@@ -63,9 +57,6 @@ export default function SideBar() {
             <div className='toggleMenu'>
                 <img onClick={()=>{
                     setActive(!active);
-                    // setOrderExpanded(false);
-                    // setFiilterExpanded(false);
-                    // setActivitiesExpanded(false);
                     }} 
                 className='toggleIcon' src={arrow} alt="toggle menu" />
             </div>
