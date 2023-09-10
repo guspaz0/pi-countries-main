@@ -27,6 +27,7 @@ export default function Home() {
             return <Card key={e.id} country={e}/>
         })}
         </CardStyle>
+        {AllCountries.length === 0? <div className='warning'>No Countries found</div> : null}
     </HomeStyle>
     )
 }
