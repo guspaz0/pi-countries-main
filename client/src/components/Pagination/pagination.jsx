@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { PaginationStyle } from '../CSS/pagination';
+import { PaginationStyle } from '../../CSS';
 
 export default function Pagination({page, setPage, maxPage}) {
 

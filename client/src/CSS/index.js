@@ -1,12 +1,13 @@
-import { MainStyle } from './main';
-import { AppStyle } from './app';
-import {CardStyle} from './card';
-import {DetailStyle} from './detail';
-import {HomeStyle} from './home';
-import {FormStyle} from './form';
-import {NavbarStyle} from './navbar';
-import {LandingStyle} from './landingPage';
-import { SideBarStyle } from './sideBar';
+import { MainStyle } from '../main.js';
+import { AppStyle } from '../app.js';
+import {CardStyle} from '../components/Card/card.js';
+import {DetailStyle} from '../components/Detail/detail.js';
+import {HomeStyle} from '../components/Home/home.js';
+import {FormStyle} from '../components/Form/form.js';
+import {NavbarStyle} from '../components/Navbar/navbar.js';
+import {LandingStyle} from '../components/LandingPage/landingPage.js';
+import { SideBarStyle } from '../components/SideBar/sideBar.js';
+import {PaginationStyle} from '../components/Pagination/pagination.js';
 
 export {
     MainStyle,
@@ -17,5 +18,6 @@ export {
     FormStyle,
     NavbarStyle,
     LandingStyle,
-    SideBarStyle
+    SideBarStyle,
+    PaginationStyle
 }

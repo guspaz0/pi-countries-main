@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import worldmap from '../assets/worldmap.png'
-
+import worldmap from './assets/worldmap.png'
 
 
 export const MainStyle = styled.div`

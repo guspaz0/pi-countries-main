@@ -1,8 +1,8 @@
-import LandingPage from "./landingPage";
-import Form from "./form";
-import Home from "./home";
-import Detail from "./detail";
-import Navbar from "./navbar";
-import SideBar from './sidebar';
+import LandingPage from "./LandingPage/landingPage.jsx";
+import Form from "./Form/form.jsx";
+import Home from "./Home/home.jsx";
+import Detail from "./Detail/detail.jsx";
+import Navbar from "./Navbar/navbar.jsx";
+import SideBar from './SideBar/sidebar.jsx';
 
 export {LandingPage, Form, Home, Detail, Navbar, SideBar}

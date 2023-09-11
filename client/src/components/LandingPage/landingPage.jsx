@@ -1,6 +1,6 @@
 import React from "react";
 import {Link } from 'react-router-dom'
-import { LandingStyle } from "../CSS";
+import { LandingStyle } from "../../CSS";
 
 export default function LandingPage() {
 

@@ -1,8 +1,8 @@
 import {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
-import { getCountryID } from '../redux/actions';
-import { DetailStyle } from '../CSS';
+import { getCountryID } from '../../redux/actions';
+import { DetailStyle } from '../../CSS';
 
 export default function Detail() {
 

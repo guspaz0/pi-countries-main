@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { filterCountries,orderCountries } from '../redux/actions';
+import { filterCountries,orderCountries, allActivities } from '../../redux/actions';
 import { Link } from 'react-router-dom';
-import { SideBarStyle } from '../CSS';
-import arrow from '../assets/arrow.png';
-import earth from '../assets/earth.png';
-import list from '../assets/list.png';
-import filter from '../assets/filter.png';
-import filter2 from '../assets/filter2.png';
+import { SideBarStyle } from '../../CSS';
+import arrow from '../../assets/arrow.png';
+import earth from '../../assets/earth.png';
+import list from '../../assets/list.png';
+import filter from '../../assets/filter.png';
+import filter2 from '../../assets/filter2.png';
 
 export default function SideBar() {
 
@@ -19,13 +19,19 @@ export default function SideBar() {
     const [filterActivity,setFilterActivity] = useState()
 
     useEffect(()=> {
+    },[Activities])
+
+    useEffect(()=> {
         //setMaxPage(Math.ceil(AllCountries.length/perPage))
         setFilterActivity(() => {
             let repeated = []
+            let uniques = []
             AllCountries.filter((e) => e.Activities.length !== 0).map((x) => {
-                return repeated = [...repeated , ...x.Activities]
+                repeated = [...repeated , ...x.Activities]
             })
-            return repeated
+            repeated.map((s) => {
+                if (!uniques.includes(s.name)) uniques.push(s.name)})
+            return uniques
         })
     },[AllCountries, Activities])
 
@@ -123,7 +129,7 @@ export default function SideBar() {
                 <label htmlFor='activity'>by available Activity in current region:</label>
                 <select className='subMenu' id='activity' name='activity' value={Filters.activity} onChange={handleFilter}>
                     <option value='all'>All</option>
-                    {filterActivity?.map((e) => {return <option key={e.name} value={e.name}>{e.name}</option>})}
+                    {filterActivity?.map((e) => {return <option key={e} value={e}>{e}</option>})}
                 </select>
             </p>}
             </li>

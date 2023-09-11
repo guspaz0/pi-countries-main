@@ -1,6 +1,6 @@
-import {NavbarStyle} from '../CSS';
+import {NavbarStyle} from '../../CSS';
 import {useDispatch} from 'react-redux';
-import { searchCountry } from '../redux/actions';
+import { searchCountry } from '../../redux/actions';
 
 export default function Navbar() {
 

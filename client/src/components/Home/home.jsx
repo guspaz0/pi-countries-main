@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
-import Card from './card';
-import Navbar from './navbar';
-import { CardStyle, HomeStyle } from '../CSS';
-import Pagination from './pagination';
+import Card from '../Card/card.jsx';
+import Navbar from '../Navbar/navbar.jsx';
+import { CardStyle, HomeStyle } from '../../CSS';
+import Pagination from '../Pagination/pagination.jsx';
 import {useSelector } from 'react-redux';
 
 export default function Home() {
