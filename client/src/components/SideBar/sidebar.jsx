@@ -138,6 +138,11 @@ export default function SideBar() {
                     <button>Create Activity</button>
                 </Link>
             </li>
+            <li>
+                <Link to={'/about'}>
+                    <button>About</button>
+                </Link>
+            </li>
         </ul>
     </div> 
     </SideBarStyle>

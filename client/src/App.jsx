@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { Route, Routes} from 'react-router-dom';
-import {LandingPage, Home, Form, Detail, SideBar} from './components/index.jsx';
+import {LandingPage, Home, Form, Detail, SideBar, About} from './components/index.jsx';
 import {useDispatch, useSelector, } from 'react-redux';
 import { getAllCountries, allActivities, } from "./redux/actions.js";
 import { AppStyle } from "./CSS";
@@ -35,7 +35,8 @@ export default function App() {
       <Route path='/form' element={<Form 
         copyAllCountries={CpCountries}
       />}/>
-      <Route path='/detail/:id' element={<Detail/>}/>  
+      <Route path='/detail/:id' element={<Detail/>}/>
+      <Route path='/about' element={<About/>}/>
     </Routes>
   </AppStyle>
   )

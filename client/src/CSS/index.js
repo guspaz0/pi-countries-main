@@ -8,6 +8,7 @@ import {NavbarStyle} from '../components/Navbar/navbar.js';
 import {LandingStyle} from '../components/LandingPage/landingPage.js';
 import { SideBarStyle } from '../components/SideBar/sideBar.js';
 import {PaginationStyle} from '../components/Pagination/pagination.js';
+import { AboutStyle } from '../components/About/About.js';
 
 export {
     MainStyle,
@@ -19,5 +20,6 @@ export {
     NavbarStyle,
     LandingStyle,
     SideBarStyle,
-    PaginationStyle
+    PaginationStyle,
+    AboutStyle
 }
