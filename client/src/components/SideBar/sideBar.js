@@ -9,6 +9,7 @@ ul {
 
 li {
     list-style: none;
+    min-height: 100px;
 }
 
 .sideMenu {
@@ -16,8 +17,8 @@ li {
     position: sticky;
     top: 0;
     background-color: white;
-    width:320px;
-    height: 100vh;
+    width:300px;
+    height: 200vh;
     box-sizing: border-box;
     padding: 5px 5px 5px 5px;
     transition: width 0.5s ease-in;
@@ -187,6 +188,7 @@ li {
         width: 60px;
     }
 }
+
 
 @media (max-width: 700px) {
 

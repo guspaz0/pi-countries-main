@@ -81,7 +81,7 @@ export default function SideBar() {
                 </span>
                 {orderMenu && <p>
                     <label htmlFor='order'></label>
-                    <select className='subMenu' id='order' name='order' onChange={handleOrder}>
+                    <select className='subMenu' id='order' name='order' disabled={!active} onChange={handleOrder}>
                         <option value='A-Z'>A-Z</option>
                         <option value='Z-A'>Z-A</option>
                         <option value='+population'>+ Population</option>
@@ -91,28 +91,27 @@ export default function SideBar() {
                 
             </li>
             <li>
-            <span onClick={()=> {
-                    setOrderMenu(false);
-                    setFilterMenu(!filterMenu);
-                    setActivityMenu(false);}}
-                className='menuItem'>                        
-                <div className='menuIcon'>
-                    <img src={filter} alt="filter icon" />
-                </div>
-                <span>FILTER</span>
-            </span>
-            {filterMenu && <p>
-                <label htmlFor='region'>by region</label>
-                <select className='subMenu' id='region' name='region' value={Filters.region} onChange={handleFilter}>
-                    <option value='all'>All</option>
-                    <option value='Americas'>Americas</option>
-                    <option value='Africa'>Africa</option>
-                    <option value='Asia'>Asia</option>
-                    <option value='Europe'>Europe</option>
-                    <option value='Oceania'>Oceania</option>
-                </select>
-            </p>}
-
+                <span onClick={()=> {
+                        setOrderMenu(false);
+                        setFilterMenu(!filterMenu);
+                        setActivityMenu(false);}}
+                    className='menuItem'>                        
+                    <div className='menuIcon'>
+                        <img src={filter} alt="filter icon" />
+                    </div>
+                    <span>FILTER</span>
+                </span>
+                {filterMenu && <p>
+                    <label htmlFor='region'>by region</label>
+                    <select className='subMenu' id='region' name='region' value={Filters.region} disabled={!active} onChange={handleFilter}>
+                        <option value='all'>All</option>
+                        <option value='Americas'>Americas</option>
+                        <option value='Africa'>Africa</option>
+                        <option value='Asia'>Asia</option>
+                        <option value='Europe'>Europe</option>
+                        <option value='Oceania'>Oceania</option>
+                    </select>
+                </p>}
             </li>
             <li>
             <span onClick={()=> {
@@ -127,7 +126,7 @@ export default function SideBar() {
             </span>
             {ActivityMenu && <p>
                 <label htmlFor='activity'>by available Activity in current region:</label>
-                <select className='subMenu' id='activity' name='activity' value={Filters.activity} onChange={handleFilter}>
+                <select className='subMenu' id='activity' name='activity' disabled={!active} value={Filters.activity} onChange={handleFilter}>
                     <option value='all'>All</option>
                     {filterActivity?.map((e) => {return <option key={e} value={e}>{e}</option>})}
                 </select>

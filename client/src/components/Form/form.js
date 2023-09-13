@@ -25,7 +25,7 @@ export const FormStyle = styled.div`
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: #111111bd;
+    //background-color: #111111bd;
     backdrop-filter: blur(10px);
     display:grid;
     color: white; 
@@ -39,7 +39,7 @@ export const FormStyle = styled.div`
     width: 26vw;
     max-width: auto;
     max-height: 95%;
-    background-color: black;
+    //background-color: rgba(150, 200, 255, 0.87);
     border-radius: 6px;
     /* padding: 4vh 4vh; */
     /* display: grid; */
@@ -83,7 +83,8 @@ export const FormStyle = styled.div`
 .formTitle{
     margin: 0;
     text-align: center;
-    background: linear-gradient(to right, #9500ff, #09f, #00ddff);
+    background: linear-gradient(to right, #9500ff, #09f, gray);
+
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Kanit';
@@ -101,18 +102,22 @@ export const FormStyle = styled.div`
     width: 20vw;
     display:grid;
     color: white;
+    box-shadow: 2px 2px 5px black;
+    //text-shadow: 1px 1px 5px white;
 }
 
 .inputBox{
     margin: .5vh;
     max-width: 85%;
     min-width: 85%;
+    box-shadow: 2px 2px 5px black;
 }
 
 .inputBox2{
     margin: .5vh;
     max-width: 65%;
     min-width: 90%;
+    box-shadow: 2px 2px 5px black;
 }
 .textBox{
     font-size: 2vh;
@@ -130,7 +135,7 @@ export const FormStyle = styled.div`
 .formButton {
     margin: 0 .5vw;
     border: 0;
-    background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff);
+    background-image: linear-gradient(150deg, #9500ff, #09f, gray);
     border-radius: 8px;
     color: white;
     /* display:flex; */
@@ -185,6 +190,7 @@ p{
     margin: 1vh;
     padding: 1vh .5vh;
     width: auto;
+    box-shadow: 2px 2px 5px black;
 }
 .searchCountry {
     margin: .5vh;

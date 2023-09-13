@@ -12,7 +12,7 @@ export default function Navbar() {
     return (
         <NavbarStyle>
             <span>
-                <input type='search' placeholder='Search country by Name' name='searchCountry'/>
+                <input className='inputSearch' type='search' placeholder='Search country by Name' name='searchCountry'/>
                 <button onClick={handleSearch}>Search</button>
             </span>
         </NavbarStyle>

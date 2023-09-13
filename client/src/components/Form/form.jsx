@@ -101,6 +101,7 @@ export default function Form({copyAllCountries}) {
                             id='name'
                             name='name'
                             type='text'
+                            placeholder='type activity name...'
                             value={form.name}
                             onChange={handleChange}
                         />
@@ -108,7 +109,7 @@ export default function Form({copyAllCountries}) {
                     </div>
                     <div className='inputContainer'>
                         <label htmlFor="difficult" className='textBox'>Difficult</label>
-                        <input className='inputBox' 
+                        <input className='inputBox'
                             type='number'
                             name='difficult'
                             min='1'

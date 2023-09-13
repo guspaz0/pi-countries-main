@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const DetailStyle = styled.div`
-    grid-column: 2;
+    grid-column: 1;
     .modal{
     position: fixed;
     top: 0;
@@ -28,7 +28,7 @@ export const DetailStyle = styled.div`
     width: 90%;
     max-width: 700px;
     max-height: 90%;
-    background-color: black;
+    background-color: rgba(150, 200, 255, 0.87);
     border-radius: 6px;
     padding: 3em 2.5em;
     /* display: grid; */
@@ -107,7 +107,7 @@ export const DetailStyle = styled.div`
       150deg,
       #9500ff,
       #09f,
-      #00ddff);
+      gray);
       border-radius: 8px;
       color: white;
       /* display:flex; */

@@ -20,7 +20,7 @@ justify-content: center;
     backdrop-filter: blur(10px);
 }
 .LadingTitle {
-    background: linear-gradient(to right, #9500ff, #09f, #00ddff);
+    background: linear-gradient(to right, #9500ff, #09f, gray);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     /* color: white; */

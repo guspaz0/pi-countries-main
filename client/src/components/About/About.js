@@ -1,20 +1,37 @@
 import styled from 'styled-components'
 
 export const AboutStyle = styled.div`
-    h1 {
-        align-items: center;
-        text-align: center;
-        //box-shadow: 2px 2px 5px black;
-        text-shadow: 1px 1px 5px white;
-    }
+
+.aboutTitle {
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(to right, #9500ff, #09f, #00ddff);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Kanit';
+    font-size: 4vh;
+    font-weight: 900;
+    text-align: center;
+}
     .about {
+        h2 {
+            align-items: center;
+            text-align: center;
+        }
+        h3 {
+            align-items: center;
+            text-align: center;
+            font-weight: 200;
+        }
         padding: 5px;
         margin: 10px;
-        background-color: rgba(255,255,0,0.9);
+        background-color: rgb(70, 70, 70);
         width: auto;
         border-radius: 5px;
         box-shadow: 2px 2px 5px black;
-        text-shadow: 1px 1px 5px white;
+        //text-shadow: 1px 1px 5px white;
+        color: white;
         gap: 10px;
         .aptitudes {
             position: relative;
@@ -24,6 +41,7 @@ export const AboutStyle = styled.div`
             align-items: center;
             justify-content: space-around;
             border-radius: 5px;
+            color: black;
             ;
         }
         .imgtext {
