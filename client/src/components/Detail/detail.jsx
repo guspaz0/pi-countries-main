@@ -10,6 +10,7 @@ export default function Detail() {
     const idDetail = useSelector(state => state.idDetail)
     
     const { id } = useParams()
+
     useEffect(() => {
         dispatch(getCountryID(id))
     },[dispatch])
@@ -33,7 +34,9 @@ export default function Detail() {
                     <h3 className='modalInformation'>Area(m2): {area}</h3>
                     <h3 className='modalInformation'>Population: {population}</h3>
                     <h3 className='modalInformation'>Activities:</h3> 
-                        <ul>{Activities.map((x) => {return <li key={x.name}>{x.name}</li>})}</ul>
+                        <ul>
+                            {Activities?.map((x) => {return <li key={x.name}>{x.name}</li>})}
+                        </ul>
                 </div>
                 <Link  strict to={`/home`}>
                     <button className='modalCloseContainer'>
