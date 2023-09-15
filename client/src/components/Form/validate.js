@@ -1,4 +1,4 @@
-export default function Validate(obj) {
+export default function Validate(obj, activities, form) {
     const { name, difficult, duration, season, country } = obj;
     let hour = parseInt(duration.slice(0,2))
     let minutes = parseInt(duration.slice(3,5))
@@ -7,7 +7,7 @@ export default function Validate(obj) {
     if (!name) {
         errors = {...errors, name: 'name cannot be null'}
     } else if (name.length < 10 || name.length > 30) errors = {...errors, name: 'name must have at least 10 characters and 30 maximum'}
-
+    if (activities.filter((s) => s.name === form.name).length > 0) errors = {...errors, name: 'Activity name already exists'}
 
     if (difficult === 0) {
         errors = {...errors, difficult: 'difficult must be a number between 0 and 5'}

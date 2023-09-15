@@ -11,11 +11,12 @@ export default function Home() {
     const [page, setPage] = useState(0)
     const perPage = 10
     const [maxPage, setMaxPage] = useState(Math.ceil(AllCountries.length/perPage))
-
+    const Activities = useSelector(state => state.Activities)
 
     useEffect(()=> {
         setMaxPage(Math.ceil(AllCountries.length/perPage))
     },[AllCountries])
+
 
     
     return (

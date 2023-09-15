@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { FormStyle } from '../../CSS';
-import { postActivity } from '../../redux/actions';
+import { FormStyle, DetailStyle } from '../../CSS';
+import { postActivity, allActivities } from '../../redux/actions';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Validate from './validate.js'
 
@@ -28,11 +29,11 @@ export default function Form({copyAllCountries}) {
     })
 
     useEffect(() => {
-        setErrors(Validate(form))
+        setErrors(Validate(form, Activities, form))
     },[form])
 
     useEffect(() => {
-        if (Activities.some((x) => x.name === form.name)) {
+        if (Activities.some((x) => x.name === form.name) && Object.keys(errors).length === 0) {
             alert('Activity created successfull')
             setForm({
                 name: null,
@@ -41,6 +42,7 @@ export default function Form({copyAllCountries}) {
                 season: 'summer',
                 country: []
             })
+            document.querySelector('input[name="name"]').value = ""
         }
     },[Activities, form.name])
 
@@ -181,6 +183,13 @@ export default function Form({copyAllCountries}) {
                         <button className='formButton' onClick={handleSubmit}>
                             <span className='textButton'>SEND</span>
                         </button>
+                    </div>
+                    <div className='formButtons'>
+                        <Link  strict to={`/home`}>
+                        <button className='modalCloseContainer'>
+                            <span className='modalClose' >Back to Menu</span>
+                        </button>
+                        </Link>
                     </div>
                 </form>
                 </div>

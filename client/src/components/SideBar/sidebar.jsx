@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { filterCountries,orderCountries, allActivities } from '../../redux/actions';
+import { filterCountries,orderCountries, getAllCountries } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 import { SideBarStyle } from '../../CSS';
 import arrow from '../../assets/arrow.png';
@@ -17,12 +17,13 @@ export default function SideBar() {
     const Filters = useSelector(state => state.filter)
 
     const [filterActivity,setFilterActivity] = useState()
+    
+    useEffect(()=> {
+        dispatch(getAllCountries())
+    },[dispatch])
 
     useEffect(()=> {
-    },[Activities])
-
-    useEffect(()=> {
-        //setMaxPage(Math.ceil(AllCountries.length/perPage))
+        //dispatch(getAllCountries())
         setFilterActivity(() => {
             let repeated = []
             let uniques = []

@@ -69,7 +69,7 @@ export default function reducer(state = initialState, action) {
         case actions.ALL_ACTIVITIES:
             return {
                 ...state,
-                Activities: action.payload
+                Activities: [...action.payload]
             }
         case actions.POST_ACTIVITY:
             return {

@@ -14,7 +14,7 @@ export default function Detail() {
         dispatch(getCountryID(id))
     },[dispatch])
 
-    const { name, flags, region, subregion, capital, area, population} = idDetail
+    const { name, flags, region, subregion, capital, area, population, Activities} = idDetail
     return (<DetailStyle>
         <section className='modal'>
             <div className='modalContainer'>
@@ -32,6 +32,8 @@ export default function Detail() {
                     <h3 className='modalInformation'>Capital: {capital}</h3>
                     <h3 className='modalInformation'>Area(m2): {area}</h3>
                     <h3 className='modalInformation'>Population: {population}</h3>
+                    <h3 className='modalInformation'>Activities:</h3> 
+                        <ul>{Activities.map((x) => {return <li key={x.name}>{x.name}</li>})}</ul>
                 </div>
                 <Link  strict to={`/home`}>
                     <button className='modalCloseContainer'>
